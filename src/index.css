@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+
+/* Ajusta el ancho aquí si cambias el tamaño del sidebar */
+:root {
+  --sidebar-width: 256px;
+}
+
+body {
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.custom-table-head th {
+  background-color: #ccc !important;  /* El gris que prefieras */
+}
+
+.table {
+  min-width: 1200px;
+}
+
+/* th, td {
+  white-space: nowrap;
+} */
+
+.border-table-content {
+  border: 1px solid #e5e7eb; 
+  border-radius: 6px;
+  /* border: '1px solid #e5e7eb', borderRadius: 8 */
+}
+
+@media (min-width: 992px) {
+  .sidebar-open {
+    margin-left: var(--sidebar-width);
+    transition: margin-left 0.2s;
+  }
+  .sidebar-closed {
+    margin-left: 0 !important;
+    transition: margin-left 0.2s;
+  }
+}
