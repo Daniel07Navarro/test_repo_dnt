@@ -7,6 +7,7 @@ import type { AuthState } from '../types/userTypes'
 const initialState: AuthState = {
   user: null,
   token: null,
+  expiresAtUtc: null,
   isAuthenticated: false,
 }
 
@@ -17,13 +18,13 @@ const authSlice = createSlice({
      /** Inicia el proceso de login (puede activar loading) */
     loginStart: () => {},
 
-    /** Login exitoso: guarda el usuario, token y cambia el estado a autenticado */
+    /** Login exitoso: guarda el token, expiración y cambia el estado a autenticado */
     loginSuccess: (state, action: PayloadAction<{
-      // user: User;
-      token: string 
+      token: string
+      expiresAtUtc: string
     }>) => {
-      // state.user = action.payload.user
       state.token = action.payload.token
+      state.expiresAtUtc = action.payload.expiresAtUtc
       state.isAuthenticated = true
     },
 
@@ -31,6 +32,7 @@ const authSlice = createSlice({
     loginFailure: (state) => {
       state.user = null
       state.token = null
+      state.expiresAtUtc = null
       state.isAuthenticated = false
     },
 
@@ -38,6 +40,7 @@ const authSlice = createSlice({
     logout: (state) => {
       state.user = null
       state.token = null
+      state.expiresAtUtc = null
       state.isAuthenticated = false
     },
   },

@@ -52,28 +52,25 @@ export interface User {
 export interface AuthState {
   user: User | null
   token: string | null
+  expiresAtUtc: string | null
   isAuthenticated: boolean
 }
 
-/** Respuesta esperada del login */
+/** Respuesta del endpoint POST /api/Auth/login */
 export interface LoginResponse {
-  // code: number
-  // message: string
-  // data: {
-    token: string
-    // user: User
-  // }
+  accessToken: string
+  expiresAtUtc: string
 }
 
 /** Props usadas en componentes de formulario */
 export interface Props {
-  onSubmit: (data: { username: string; password: string }) => void
+  onSubmit: (data: { email: string; password: string }) => void
   loading?: boolean
   error?: string
 }
 
 /** Valores de formulario de login */
 export type LoginFormValues = {
-  username: string
+  email: string
   password: string
 }

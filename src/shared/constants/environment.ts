@@ -13,7 +13,11 @@ export const CALL_UP_PATH = import.meta.env.VITE_API_CALL_UP_PATH
 export const CAMPAIGNS_PATH = import.meta.env.VITE_API_CAMPAIGNS_PATH
 export const EMAIL_HISTORY_PATH = import.meta.env.VITE_API_EMAIL_PATH
 
-/** URL completa para login */
+/** URL completa para login (backend La Lucha) */
+export const AUTH_LOGIN_URL =
+  import.meta.env.VITE_AUTH_LOGIN_URL ?? 'http://localhost:5218/api/Auth/login'
+
+/** URL completa para login (legacy) */
 export const LOGIN_URL = `${API_URL}${API_LOGIN_PATH}`
 
 /** URL completa para obtener transacciones */

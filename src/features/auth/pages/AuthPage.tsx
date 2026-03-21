@@ -4,19 +4,19 @@ import { useLogin } from '../hooks/useLogin'
 import LoginCard from '../components/organisms/LoginCard'
 
 /**
- * Página de autenticación (Login).
+ * Página de autenticación (Login) — Temática La Lucha.
  * - Renderiza el formulario de inicio de sesión encapsulado en un `LoginCard`.
  * - Utiliza `useLogin`, un custom hook que maneja el estado de autenticación (submit, loading, error).
- * - Está estilizada con CoreUI y centrada verticalmente.
+ * - Estilizada con fondo oscuro y acento rojo acorde al branding "La Lucha".
  */
 const AuthPage: React.FC = () => {
   const { login, loading, error } = useLogin()
 
   return (
-    <div className="bg-body-tertiary min-vh-100 d-flex flex-row align-items-center bg-login-page">
+    <div className="lucha-login-page">
       <CContainer>
-        <CRow className="justify-content-center p-3">
-          <CCol md={8} className='login-card'>
+        <CRow className="justify-content-center">
+          <CCol xs={12} sm={10} md={7} lg={5}>
             <LoginCard onSubmit={login} loading={loading} error={error || undefined} />
           </CCol>
         </CRow>

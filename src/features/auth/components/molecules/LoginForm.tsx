@@ -2,53 +2,54 @@ import React from 'react'
 import { useForm } from 'react-hook-form'
 import Input from '../atoms/Input'
 import CIcon from '@coreui/icons-react'
-import { cilUser, cilLockLocked } from '@coreui/icons'
+import { cilEnvelopeClosed, cilLockLocked } from '@coreui/icons'
 import type { LoginFormValues, Props } from '../../types/userTypes'
 import { CButton } from '@coreui/react'
-import logo from '../../../../assets/img/logo-chatbot.webp'
-
 
 const LoginForm: React.FC<Props> = ({ onSubmit, loading, error }) => {
   const { register, handleSubmit, formState: { errors } } = useForm<LoginFormValues>()
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 24 }}>
-          <div style={{borderRadius: '100%', padding: '8px', backgroundColor: '#ffffff', display: 'inline-block'}}>
-            <img
-              src={logo}
-              alt="Logo"
-              style={{ maxHeight: 92, width: "auto", maxWidth: "100%" }}
-            />
-          </div>
+      {/* Logo La Lucha */}
+      <div className="lucha-logo-wrapper">
+        <img
+          src="/brand/la-lucha-logo.svg"
+          alt="La Lucha Sanguchería Criolla"
+          className="lucha-logo"
+        />
       </div>
-      <b>Bienvenido. Ingrese al sistema.</b>
-      <br/><br/>
+
+      <p className="lucha-welcome">Bienvenido. Ingrese al sistema.</p>
 
       <Input
-        {...register('username', { required: 'Username is required' })}
-        placeholder="Username"
-        autoComplete="username"
-        icon={<CIcon icon={cilUser} />}
+        {...register('email', {
+          required: 'El correo es obligatorio',
+        pattern: { value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, message: 'Correo inválido' },
+        })}
+        type="email"
+        placeholder="Correo electrónico"
+        autoComplete="email"
+        icon={<CIcon icon={cilEnvelopeClosed} />}
       />
-      {errors.username && <span style={{color: 'red'}}>{errors.username.message}</span>}
+      {errors.email && <span className="lucha-field-error">{errors.email.message}</span>}
 
       <Input
-        {...register('password', { required: 'Password is required' })}
+        {...register('password', { required: 'La contraseña es obligatoria' })}
         type="password"
-        placeholder="Password"
+        placeholder="Contraseña"
         autoComplete="current-password"
         icon={<CIcon icon={cilLockLocked} />}
       />
-      {errors.password && <span style={{color: 'red'}}>{errors.password.message}</span>}
+      {errors.password && <span className="lucha-field-error">{errors.password.message}</span>}
 
       {/* Error de autenticación */}
-      {error && <div style={{color: 'red'}}>{error}</div>}
+      {error && <div className="lucha-auth-error">{error}</div>}
 
-      {/* Botón de enviar */}
+      {/* Botón de submit */}
       <div className="d-flex justify-content-end align-items-center mt-4">
-        <CButton type="submit" color="primary" disabled={loading}>
-          {loading ? 'Loading...' : 'Ingresar'}
+        <CButton type="submit" className="lucha-btn-submit" disabled={loading}>
+          {loading ? 'Ingresando...' : 'Ingresar'}
         </CButton>
       </div>
     </form>
