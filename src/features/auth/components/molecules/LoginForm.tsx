@@ -4,10 +4,14 @@ import Input from '../atoms/Input'
 import CIcon from '@coreui/icons-react'
 import { cilEnvelopeClosed, cilLockLocked } from '@coreui/icons'
 import type { LoginFormValues, Props } from '../../types/userTypes'
-import { CButton } from '@coreui/react'
+import { CButton, CSpinner } from '@coreui/react'
 
 const LoginForm: React.FC<Props> = ({ onSubmit, loading, error }) => {
-  const { register, handleSubmit, formState: { errors } } = useForm<LoginFormValues>()
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<LoginFormValues>()
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -25,7 +29,7 @@ const LoginForm: React.FC<Props> = ({ onSubmit, loading, error }) => {
       <Input
         {...register('email', {
           required: 'El correo es obligatorio',
-        pattern: { value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, message: 'Correo inválido' },
+          pattern: { value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, message: 'Correo inválido' },
         })}
         type="email"
         placeholder="Correo electrónico"
@@ -49,7 +53,14 @@ const LoginForm: React.FC<Props> = ({ onSubmit, loading, error }) => {
       {/* Botón de submit */}
       <div className="d-flex justify-content-end align-items-center mt-4">
         <CButton type="submit" className="lucha-btn-submit" disabled={loading}>
-          {loading ? 'Ingresando...' : 'Ingresar'}
+          {loading ? (
+            <>
+              <CSpinner size="sm" className="me-2" />
+              Ingresando...
+            </>
+          ) : (
+            'Ingresar'
+          )}
         </CButton>
       </div>
     </form>
