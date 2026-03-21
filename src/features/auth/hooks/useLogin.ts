@@ -3,12 +3,14 @@ import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import authService from '../services/authService'
 import { loginStart, loginSuccess, loginFailure } from '../slices/authSlice'
+import { tokenUtils } from '../../../shared/utils/tokenUtils'
 
 /**
  * Custom hook: `useLogin`
  * - Encapsula la lógica de inicio de sesión.
  * - Administra estado local `loading` y `error`.
  * - Dispara acciones de Redux (`loginStart`, `loginSuccess`, `loginFailure`).
+ * - Persiste el token en localStorage via tokenUtils.
  * - Redirige al usuario al dashboard si el login es exitoso.
  */
 export function useLogin() {
@@ -19,21 +21,24 @@ export function useLogin() {
 
   /**
    * Ejecuta la lógica de login:
-   * - Llama al servicio de autenticación.
-   * - Actualiza el estado global con los datos del usuario.
+   * - Llama al servicio de autenticación con email y password.
+   * - Persiste el accessToken y expiresAtUtc en localStorage.
+   * - Actualiza el estado global de Redux.
    * - Redirige al dashboard.
    */
-  const login = async (data: { username: string; password: string }) => {
+  const login = async (data: { email: string; password: string }) => {
     setLoading(true)
     setError(null)
     dispatch(loginStart())
     try {
-      const response = await authService.login(data.username, data.password)
-      
-      console.log("login response: ", response);
-      
+      const response = await authService.login(data.email, data.password)
+
+      // Persist token in localStorage for consistent access
+      tokenUtils.save(response.accessToken, response.expiresAtUtc)
+
       dispatch(loginSuccess({
-        token: response.token
+        token: response.accessToken,
+        expiresAtUtc: response.expiresAtUtc,
       }))
       navigate('/dashboard')
     } catch (e: unknown) {
