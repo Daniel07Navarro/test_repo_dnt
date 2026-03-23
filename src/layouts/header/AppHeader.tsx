@@ -93,12 +93,7 @@ const AppHeader: React.FC = () => {
         */}
 
         {/* Controles a la derecha */}
-        <CHeaderNav className="ms-auto" />
-        <CHeaderNav>
-          <li className="nav-item py-1">
-            <div className="vr h-100 mx-2 text-body text-opacity-75"></div>
-          </li>
-
+        <CHeaderNav className="ms-auto">
           {/* Cambio de tema: dark, light, auto */}
           <CDropdown variant="nav-item" placement="bottom-end">
             <CDropdownToggle caret={false}>
@@ -140,10 +135,6 @@ const AppHeader: React.FC = () => {
               </CDropdownItem>
             </CDropdownMenu>
           </CDropdown>
-
-          <li className="nav-item py-1">
-            <div className="vr h-100 mx-2 text-body text-opacity-75"></div>
-          </li>
 
           <AppHeaderDropdown />
         </CHeaderNav>
