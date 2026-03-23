@@ -17,7 +17,6 @@ import {
 } from '@coreui/react'
 import { AppSidebarNav } from './AppSidebarNav'
 import navigation from './_nav'
-import logo from '../../assets/img/logo-chatbot.webp'
 import { setSidebarShow } from '../slices/sidebarSlice'
 import type { RootState } from '../../store'
 
@@ -36,14 +35,12 @@ const AppSidebar: React.FC = () => {
       onVisibleChange={(val: boolean) => dispatch(setSidebarShow(val))}
     >
       <CSidebarHeader className="border-bottom">
-        <CSidebarBrand href="/" className="w-100 d-flex justify-content-center align-items-center">
-          <div style={{border: '2px solid black', borderRadius: '100%', padding: '8px', backgroundColor: '#ffffff', display: 'inline-block'}}>
-            <img
-              src={logo}
-              alt="Logo"
-              style={{ maxHeight: 92, width: "auto", maxWidth: "100%" }}
-            />
-          </div>
+        <CSidebarBrand href="/" className="w-100 d-flex justify-content-center align-items-center py-2">
+          <img
+            src="/brand/la-lucha-logo.svg"
+            alt="La Lucha Sanguchería Criolla"
+            style={{ maxHeight: 72, width: 'auto', maxWidth: '80%' }}
+          />
         </CSidebarBrand>
         <CCloseButton
           className="d-lg-none"

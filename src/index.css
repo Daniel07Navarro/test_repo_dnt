@@ -157,3 +157,88 @@ body {
   border-color: var(--lucha-red) !important;
   box-shadow: 0 0 0 0.2rem rgba(200, 16, 46, 0.25) !important;
 }
+
+/* =========================================================
+   LA LUCHA — Dashboard
+   ========================================================= */
+
+.lucha-dashboard-banner {
+  border-top: 4px solid var(--lucha-red) !important;
+  background: linear-gradient(135deg, var(--lucha-black) 0%, var(--lucha-gray) 100%) !important;
+  color: var(--lucha-white) !important;
+  border-radius: 6px !important;
+  box-shadow: 0 4px 20px rgba(200, 16, 46, 0.15) !important;
+}
+
+.lucha-dashboard-title {
+  color: var(--lucha-white);
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.lucha-dashboard-subtitle {
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 0.9rem;
+  letter-spacing: 0.5px;
+}
+
+.lucha-section-heading {
+  color: var(--lucha-red);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 0.85rem;
+}
+
+.lucha-quick-card {
+  border: 1px solid rgba(200, 16, 46, 0.2) !important;
+  border-left: 4px solid var(--lucha-red) !important;
+  transition: box-shadow 0.2s, transform 0.15s !important;
+  border-radius: 6px !important;
+}
+
+.lucha-quick-card:hover {
+  box-shadow: 0 6px 18px rgba(200, 16, 46, 0.2) !important;
+  transform: translateY(-2px);
+}
+
+.lucha-quick-icon-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: rgba(200, 16, 46, 0.1);
+  flex-shrink: 0;
+}
+
+.lucha-quick-icon {
+  color: var(--lucha-red) !important;
+}
+
+.lucha-quick-label {
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.lucha-quick-desc {
+  font-size: 0.8rem;
+  color: #888;
+}
+
+.lucha-cta-card {
+  border-top: 4px solid var(--lucha-red) !important;
+  border-radius: 6px !important;
+}
+
+.lucha-cta-title {
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+
+.lucha-cta-desc {
+  color: #888;
+  font-size: 0.875rem;
+}

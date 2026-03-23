@@ -5,7 +5,7 @@ const Profile = React.lazy(() => import('../features/user/pages/ProfilePage'));
 const CallsList = React.lazy(() => import('../features/calls/components/CallListPage'));
 const CallUpList = React.lazy(() => import('../features/call-up/components/CallUpPage'));
 const RegisterUsers = React.lazy(() => import('../features/create-users/pages/UserRegistrationPage'));
-//const MyAiPage = React.lazy(() => import('../features/my-ai/components/MyAiPage'));
+const MyAiPage = React.lazy(() => import('../features/my-ai/components/MyAiPage'));
 const UserList = React.lazy(() => import('../features/users-list/components/UserListPage'));
 const ConfigPage = React.lazy(() => import ("../features/config/components/ConfigPage"));
 const CallDetailPage = React.lazy(() => import('../features/calls/components/CallDetailPage'));
@@ -33,7 +33,7 @@ const routes: AppRoute[] = [
   { path: '/profile', name: 'Perfil de usuario', element: Profile }, // perfil del usuario conectado
   { path: '/calls', name: 'Llamadas', element: CallsList }, // lista de las llamadas
   { path: '/call-up', name: 'Llamar', element: CallUpList }, // llamada que se hace desde el portal
-  //{ path: '/my-ai', name: 'Mi IA', element: MyAiPage }, // mi IA
+  { path: '/my-ai', name: 'Mi IA', element: MyAiPage }, // mi IA
   { path: '/config', name: 'Configuración', element: ConfigPage }, // configuración
   { path: '/email', name: 'Correos electrónicos', element: EmailListPage }, // emails
   { path: '/calls/:id', name: 'Detalle de la llamada', element: CallDetailPage }, // detalle de la llamada

@@ -1,7 +1,7 @@
 import React from 'react'
 import CIcon from '@coreui/icons-react'
 import {
-  //cibElectron,
+  cibElectron,
   cilBullhorn,
   cilGroup,
   cilPhone,
@@ -91,6 +91,12 @@ const _nav: NavItemType[] = [
   //  to: '/my-ai',
   //  icon: <CIcon icon={cibElectron} customClassName="nav-icon" />,
   //},
+  {
+    component: CNavItem,
+    name: 'Mi IA',
+    to: '/my-ai',
+    icon: <CIcon icon={cibElectron} customClassName="nav-icon" />,
+  },
   {
     component: CNavItem,
     name: 'Configuración',
