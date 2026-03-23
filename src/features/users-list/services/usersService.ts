@@ -1,23 +1,16 @@
 /**
  * Servicio de Gestión de Usuarios — La Lucha.
  *
- * ⚠️  INTEGRACIÓN BACKEND:
- * Reemplaza las URLs y la lógica mock por llamadas reales a tu API.
- * Actualmente usa datos de ejemplo para el diseño visual.
- *
- * Endpoints necesarios del backend:
- *   GET    /api/users              → Lista de usuarios (ManagedUser[])
- *   GET    /api/users/:id          → Detalle de un usuario (ManagedUser)
- *   PUT    /api/users/:id          → Editar usuario (UpdateUserPayload → ManagedUser)
- *   DELETE /api/users/:id          → Eliminar usuario
- *   POST   /api/users              → Crear usuario (CreateUserPayload → ManagedUser)
+ * GET  /api/users        → conectado a la API real
+ * GET  /api/users/:id    → conectado a la API real
+ * PUT  /api/users/:id    → pendiente de endpoint backend
+ * DELETE /api/users/:id  → pendiente de endpoint backend
+ * POST /api/users        → pendiente de endpoint backend
  */
 
+import api from '../../../shared/services/api'
+import { USERS_URL } from '../../../shared/constants/environment'
 import type { ManagedUser, CreateUserPayload, UpdateUserPayload } from '../types/usersTypes'
-
-// TODO: importar api y la URL cuando tengas el endpoint
-// import api from '../../../shared/services/api'
-// const USERS_URL = import.meta.env.VITE_API_USERS_URL ?? `${import.meta.env.VITE_API_URL}/api/users`
 
 /* -----------------------------------------------------------------------
    Datos mock (solo para el diseño — reemplazar con llamadas a la API)
@@ -103,23 +96,20 @@ const MOCK_USERS: ManagedUser[] = [
 
 /**
  * Obtiene la lista de todos los usuarios.
- * TODO: reemplazar con → return (await api.get<ManagedUser[]>(USERS_URL)).data
+ * GET /api/users
  */
 export const getUsers = async (): Promise<ManagedUser[]> => {
-  // Simulación de latencia de red
-  await new Promise((r) => setTimeout(r, 600))
-  return MOCK_USERS
+  const response = await api.get<ManagedUser[]>(USERS_URL)
+  return response.data
 }
 
 /**
  * Obtiene el detalle de un usuario por ID.
- * TODO: reemplazar con → return (await api.get<ManagedUser>(`${USERS_URL}/${id}`)).data
+ * GET /api/users/:id
  */
 export const getUserById = async (id: string): Promise<ManagedUser> => {
-  await new Promise((r) => setTimeout(r, 400))
-  const user = MOCK_USERS.find((u) => u.id === id)
-  if (!user) throw new Error('Usuario no encontrado')
-  return user
+  const response = await api.get<ManagedUser>(`${USERS_URL}/${id}`)
+  return response.data
 }
 
 /**
