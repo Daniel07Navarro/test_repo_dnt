@@ -26,3 +26,4 @@ export const CALLS_URL = `${API_URL}${API_CALLS_PATH}`
 
 export const CALLS_UP_URL = `${API_URL}${CALL_UP_PATH}`
 export const CAMPAIGNS_URL = `${API_URL}${CAMPAIGNS_PATH}`
+export const USERS_URL = `${API_URL}/api/users`
