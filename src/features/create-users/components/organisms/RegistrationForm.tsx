@@ -1,10 +1,8 @@
 import React from 'react';
-// Importa los componentes de CoreUI que necesitas
 import {
   CButton,
   CCard,
   CCardBody,
-  CCardHeader,
   CCol,
   CForm,
   CFormInput,
@@ -12,9 +10,10 @@ import {
   CSpinner,
   CAlert,
   CInputGroupText,
-  CInputGroup
+  CInputGroup,
+  CFormLabel,
 } from '@coreui/react';
-import { MdOutlineMail, MdOutlinePassword } from "react-icons/md";
+import { MdOutlineMail, MdOutlinePassword } from 'react-icons/md';
 import { CIcon } from '@coreui/icons-react';
 import { cilShortText, cilUser, cilUserPlus } from '@coreui/icons';
 
@@ -25,112 +24,151 @@ interface RegistrationFormProps {
   error: string | null;
 }
 
-const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSubmit, isLoading, error }) => {
+/**
+ * Formulario de registro de usuario — Temática La Lucha.
+ * Campos: username, fullName, email, password, confirmPassword.
+ */
+const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSubmit, onChange, isLoading, error }) => {
   return (
-    <CRow className="justify-content-center align-items-center" style={{ minHeight: '70vh' }}>
-      <CCol md={8} lg={6} xl={5}>
-        <CCard className="mx-4">
-          <CCardHeader className="p-4">
-            <div className="d-flex align-items-center">
-              <CIcon icon={cilUserPlus} className="me-2" size="3xl" />
-              <div className='ms-2'>
-                <h2 className="mb-0">Crear nuevo usuario</h2>
-                <p className="text-body-secondary mb-0">Rellena los datos para el registro.</p>
+    <CRow className="justify-content-center align-items-start mt-2">
+      <CCol md={10} lg={8} xl={6}>
+
+        {/* Cabecera */}
+        <CCard className="mb-4 lucha-users-header">
+          <CCardBody className="p-4">
+            <div className="d-flex align-items-center gap-3">
+              <div className="lucha-users-icon-wrap">
+                <CIcon icon={cilUserPlus} size="xl" className="text-white" />
+              </div>
+              <div>
+                <h4 className="lucha-users-title mb-0">Registrar nuevo usuario</h4>
+                <p className="lucha-users-subtitle mb-0">
+                  Completa los datos para dar acceso al sistema
+                </p>
               </div>
             </div>
-          </CCardHeader>
+          </CCardBody>
+        </CCard>
+
+        {/* Formulario */}
+        <CCard className="lucha-users-table-card">
           <CCardBody className="p-4">
             <CForm onSubmit={onSubmit}>
-              
-            {error && <CAlert color="danger">{error}</CAlert>}
-            <div className="mb-4">
-              <CInputGroup className='mb-4'>
-                <CInputGroupText><CIcon icon={cilUser} /></CInputGroupText>
-                  <CFormInput
-                    type="text"
-                    placeholder="Nombre de usuario"
-                    required
-                  />
-              </CInputGroup>
-            </div>
+              {error && <CAlert color="danger" className="mb-4">{error}</CAlert>}
 
-            <div className="mb-4">
-              <CInputGroup className='mb-4'>
-                <CInputGroupText><CIcon icon={cilShortText} /></CInputGroupText>
-                  <CFormInput
-                    type="text"
-                    placeholder="Nombre completo"
-                    required
-                  />
-              </CInputGroup>
-            </div>
+              <CRow className="g-3 mb-3">
+                <CCol xs={12} sm={6}>
+                  <CFormLabel className="lucha-form-label">Nombre de usuario *</CFormLabel>
+                  <CInputGroup>
+                    <CInputGroupText className="lucha-search-icon">
+                      <CIcon icon={cilUser} />
+                    </CInputGroupText>
+                    <CFormInput
+                      name="username"
+                      type="text"
+                      placeholder="Ej: jperez"
+                      className="lucha-form-input"
+                      onChange={onChange}
+                      required
+                    />
+                  </CInputGroup>
+                </CCol>
 
-            <div className="mb-4">
-              <CInputGroup className='mb-4'>
-                <CInputGroupText><MdOutlineMail /></CInputGroupText>
+                <CCol xs={12} sm={6}>
+                  <CFormLabel className="lucha-form-label">Nombre completo *</CFormLabel>
+                  <CInputGroup>
+                    <CInputGroupText className="lucha-search-icon">
+                      <CIcon icon={cilShortText} />
+                    </CInputGroupText>
+                    <CFormInput
+                      name="fullName"
+                      type="text"
+                      placeholder="Ej: Juan Pérez"
+                      className="lucha-form-input"
+                      onChange={onChange}
+                      required
+                    />
+                  </CInputGroup>
+                </CCol>
+              </CRow>
+
+              <div className="mb-3">
+                <CFormLabel className="lucha-form-label">Correo electrónico *</CFormLabel>
+                <CInputGroup>
+                  <CInputGroupText className="lucha-search-icon">
+                    <MdOutlineMail />
+                  </CInputGroupText>
                   <CFormInput
+                    name="email"
                     type="email"
-                    placeholder="Correo electrónico"
+                    placeholder="correo@lalucha.com"
+                    className="lucha-form-input"
+                    onChange={onChange}
                     required
                   />
-              </CInputGroup>
-            </div>
-
-            <div className="mb-4">
-              <CInputGroup className='mb-4'>
-                <CInputGroupText><MdOutlinePassword /></CInputGroupText>
-                  <CFormInput
-                    type="password"
-                    placeholder="Contraseña"
-                    required
-                  />
-              </CInputGroup>
-            </div>
-
-              <CInputGroup className='mb-4'>
-                <CInputGroupText><MdOutlinePassword /></CInputGroupText>
-                  <CFormInput
-                    type="password"
-                    placeholder="Repetir contraseña"
-                    required
-                  />
-              </CInputGroup>
-
-              {/* <div className="mb-3">
-                <CFormLabel htmlFor="username">Nombre de usuario</CFormLabel>
-                <CFormInput id="username" name="username" type="text" onChange={onChange} required />
+                </CInputGroup>
               </div>
-              
-              <div className="mb-3">
-                <CFormLabel htmlFor="fullName">Nombre completo</CFormLabel>
-                <CFormInput id="fullName" name="fullName" type="text" onChange={onChange} required />
-              </div>
-              
-              <div className="mb-3">
-                <CFormLabel htmlFor="email">Correo electrónico</CFormLabel>
-                <CFormInput id="email" name="email" type="email" onChange={onChange} required />
-              </div>
-              
-              <div className="mb-4">
-                <CFormLabel htmlFor="password">Contraseña</CFormLabel>
-                <CFormInput id="password" name="password" type="password" onChange={onChange} required />
-              </div> */}
-              
-              <div className="d-grid">
-                <CButton type="submit" color="primary" disabled={isLoading} style={{ height: '54px' }}>
+
+              <CRow className="g-3 mb-4">
+                <CCol xs={12} sm={6}>
+                  <CFormLabel className="lucha-form-label">Contraseña *</CFormLabel>
+                  <CInputGroup>
+                    <CInputGroupText className="lucha-search-icon">
+                      <MdOutlinePassword />
+                    </CInputGroupText>
+                    <CFormInput
+                      name="password"
+                      type="password"
+                      placeholder="Contraseña"
+                      className="lucha-form-input"
+                      onChange={onChange}
+                      required
+                    />
+                  </CInputGroup>
+                </CCol>
+
+                <CCol xs={12} sm={6}>
+                  <CFormLabel className="lucha-form-label">Repetir contraseña *</CFormLabel>
+                  <CInputGroup>
+                    <CInputGroupText className="lucha-search-icon">
+                      <MdOutlinePassword />
+                    </CInputGroupText>
+                    <CFormInput
+                      name="confirmPassword"
+                      type="password"
+                      placeholder="Repetir contraseña"
+                      className="lucha-form-input"
+                      required
+                    />
+                  </CInputGroup>
+                </CCol>
+              </CRow>
+
+              <div className="d-flex justify-content-end gap-2">
+                <CButton
+                  type="button"
+                  className="lucha-btn-outline"
+                  onClick={() => window.history.back()}
+                  disabled={isLoading}
+                >
+                  Cancelar
+                </CButton>
+                <CButton
+                  type="submit"
+                  className="lucha-btn-submit px-4"
+                  disabled={isLoading}
+                >
                   {isLoading ? (
-                    <CSpinner size="sm" />
+                    <><CSpinner size="sm" className="me-2" />Registrando...</>
                   ) : (
-                    <>
-                      Registrar usuario 
-                    </>
+                    <><CIcon icon={cilUserPlus} className="me-2" />Registrar usuario</>
                   )}
                 </CButton>
               </div>
-
             </CForm>
           </CCardBody>
         </CCard>
+
       </CCol>
     </CRow>
   );
